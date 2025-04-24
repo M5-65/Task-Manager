@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">Task Manager</h1>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" data-page="board">Board View</a></li>
+                <li><a href="#" class="nav-link" data-page="list">List View</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Board View -->
+        <div class="page" id="board-page">
+            <div class="page-header">
+                <div class="user-section">
+                    <span id="current-user">Guest</span>
+                    <button id="add-task-btn" class="btn primary">+ New Task</button>
+                </div>
+            </div>
+
+            <div class="board">
+                <div class="column" id="todo">
+                    <h2>To Do</h2>
+                    <div class="task-list" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                </div>
+                <div class="column" id="in-progress">
+                    <h2>In Progress</h2>
+                    <div class="task-list" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                </div>
+                <div class="column" id="done">
+                    <h2>Done</h2>
+                    <div class="task-list" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="dragLeave(event)"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- List View -->
+        <div class="page hidden" id="list-page">
+            <div class="page-header">
+                <div class="controls">
+                    <button id="add-task-btn-list" class="btn primary">+ New Task</button>
+                    <div class="filter-sort">
+                        <select id="priority-filter" class="select-input">
+                            <option value="all">All Priorities</option>
+                            <option value="high">High Priority</option>
+                            <option value="medium">Medium Priority</option>
+                            <option value="low">Low Priority</option>
+                        </select>
+                        <select id="status-filter" class="select-input">
+                            <option value="all">All Status</option>
+                            <option value="todo">To Do</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                        <select id="sort-by" class="select-input">
+                            <option value="date-asc">Date ↑</option>
+                            <option value="date-desc">Date ↓</option>
+                            <option value="priority">Priority</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Due Date</th>
+                            <th>Assignee</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="task-table-body">
+                        <!-- Tasks will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Modal -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Task</h2>
+            <form id="task-form">
+                <div class="form-group">
+                    <label for="task-title">Title:</label>
+                    <input type="text" id="task-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-description">Description:</label>
+                    <textarea id="task-description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="task-due-date">Due Date:</label>
+                    <input type="datetime-local" id="task-due-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-assignee">Assignee:</label>
+                    <input type="text" id="task-assignee">
+                </div>
+                <div class="form-group">
+                    <label for="task-priority">Priority:</label>
+                    <select id="task-priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn primary">Create Task</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html> 
